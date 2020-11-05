@@ -2,5 +2,49 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ng-textarea": {
+      "projectType": "library",
+      "root": "projects/ng-textarea",
+      "sourceRoot": "projects/ng-textarea/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ng-textarea/tsconfig.lib.json",
+            "project": "projects/ng-textarea/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-textarea/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-textarea/src/test.ts",
+            "tsConfig": "projects/ng-textarea/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-textarea/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-textarea/tsconfig.lib.json",
+              "projects/ng-textarea/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": "bc5ab411-f671-4b35-824d-14c052114dbe"
+  },
+  "defaultProject": "ng-textarea"
 }
