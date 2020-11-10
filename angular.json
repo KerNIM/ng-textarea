@@ -42,6 +42,127 @@
           }
         }
       }
+    },
+    "textarea-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/textarea-test",
+      "sourceRoot": "projects/textarea-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/textarea-test",
+            "index": "projects/textarea-test/src/index.html",
+            "main": "projects/textarea-test/src/main.ts",
+            "polyfills": "projects/textarea-test/src/polyfills.ts",
+            "tsConfig": "projects/textarea-test/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/textarea-test/src/favicon.ico",
+              "projects/textarea-test/src/assets"
+            ],
+            "styles": [
+              "projects/textarea-test/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/textarea-test/src/environments/environment.ts",
+                  "with": "projects/textarea-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "textarea-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "textarea-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "textarea-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/textarea-test/src/test.ts",
+            "polyfills": "projects/textarea-test/src/polyfills.ts",
+            "tsConfig": "projects/textarea-test/tsconfig.spec.json",
+            "karmaConfig": "projects/textarea-test/karma.conf.js",
+            "assets": [
+              "projects/textarea-test/src/favicon.ico",
+              "projects/textarea-test/src/assets"
+            ],
+            "styles": [
+              "projects/textarea-test/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/textarea-test/tsconfig.app.json",
+              "projects/textarea-test/tsconfig.spec.json",
+              "projects/textarea-test/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/textarea-test/e2e/protractor.conf.js",
+            "devServerTarget": "textarea-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "textarea-test:serve:production"
+            }
+          }
+        }
+      }
     }},
   "cli": {
     "analytics": "bc5ab411-f671-4b35-824d-14c052114dbe"
